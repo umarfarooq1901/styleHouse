@@ -1,0 +1,176 @@
+<link rel="stylesheet" href="/css/navbar.css" />
+
+<header>
+  <div class="header-container">
+
+    <div class="logo">
+      
+        <img
+          src="/assets/hamburger.svg"
+          alt="Style House Logo"
+          class="hamburger"
+          id="hamburger"
+        />
+    
+
+      <a href="/">
+        <img src="/assets/logo.png" alt="Style House Logo" class="logo-img" />
+      </a>
+
+     
+        <img src="/assets/close.svg" alt="Style House Logo" class="close" id="close" />
+     
+    </div>
+
+    <div id="target_div" class="target_div">
+
+      <div class="main-menu ">
+        <ul class="menu">
+
+          <li><a href="/men">Men</a></li>
+          <li><a href="/women">Women </a></li>
+          <li><a href="/kids">kids </a></li>
+          <li><a href="/accessories">Accesories</a></li>
+          <li><a href="/services">Our Services</a></li>
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/assets/catalog.pdf" download>Download Catalog</a></li>
+
+        </ul>
+
+        <form method="post" action="/search">
+          <input
+            type="text"
+            placeholder="Search items..."
+            name="search_query"
+            required
+          />
+          <button type="submit" class="search-btn">Search</button>
+        </form>
+
+        <ul class="icons">
+
+          <li>
+            <a href="/locator">
+              <img src="/assets/locator.svg" alt="locator icon" /></a>
+          </li>
+
+          <li>{{#if username}}
+              <a href="/user/dashboard/">
+                <img src="/assets/user.svg" alt="user-icon" /></a>
+            {{else}}
+              <a href="/user/login">
+              <img
+                  src="/assets/user.svg"
+                  alt="user icon"
+                /></a>
+
+            {{/if}}
+          </li>
+          <li>
+            <a href="/user/cart">
+              <img src="/assets/cart.svg" alt="cart icon" />
+            </a>
+            {{#if username}}
+              <span style="color: aliceblue;">
+                {{cart.length}}</span>
+            {{/if}}
+          </li>
+
+        </ul>
+
+      </div>
+
+      <div class="lower-menu">
+
+        <span>
+          <a style="color: rgb(206, 87, 87); text-decoration : none" href="/shipping-policy">Free Shipping over 80$</a>  
+        </span>
+
+        <span>
+           <a style="color: rgb(206, 87, 87); text-decoration : none" href="/nextDayCollect">  Next Day Click & Collect </a>
+        </span>
+
+        <span>
+           <a style="color: rgb(206, 87, 87); text-decoration : none" href="/return-policy"> 30 days Hassle Free Return </a>
+        </span>
+
+        {{#if username}}
+          <p>Hi,
+            {{username}}
+            We Welcome u Back!
+            <img id="dropdown" src="/assets/arrowDown.svg" alt="no image" />
+          </p>
+
+          <div id="dropdown-list" class="dropdown-list display-none">
+
+            <img id="dropdown-close" src="/assets/close.svg" alt="no image" />
+            <ul>
+
+              <li>
+                <a id="logout" href="/user/logout"> Logout </a>
+              </li>
+
+
+              <li>
+                <a id="orders" href="/user/orders"> Orders </a>
+              </li>
+            
+            </ul>
+
+          </div>
+
+        {{/if}}
+
+      </div>
+
+    </div>
+
+
+
+  </div>
+</header>
+
+<script>
+
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const target = document.getElementById("target_div");
+  const hamburger = document.getElementById("hamburger");
+  const close = document.getElementById("close");
+
+  if (hamburger) {
+    hamburger.addEventListener("click", () => {
+      target.style.display = "block";
+     // console.log("Hamburger clicked");
+    });
+  }
+
+  if (close) {
+    close.addEventListener("click", () => {
+      target.style.display = "none";
+      //console.log("Close clicked");
+    });
+  }
+
+  // Dropdown logic
+  const dropdown = document.getElementById("dropdown");
+  const dropdownClose = document.getElementById("dropdown-close");
+  const dropdownList = document.getElementById("dropdown-list");
+
+  if (dropdown) {
+    dropdown.addEventListener("click", () => {
+      dropdownList.classList.remove("display-none");
+    });
+  }
+
+  if (dropdownClose) {
+    dropdownClose.addEventListener("click", () => {
+      dropdownList.classList.add("display-none");
+    });
+  }
+
+});
+
+
+</script>

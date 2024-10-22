@@ -1,0 +1,161 @@
+<link rel="stylesheet" href="/css/singleProductPage.css" />
+
+
+
+
+<div class="single-product-card">
+
+    <div class="product-image">
+        <img src="{{product.imageUrl}}" alt="{{product.name}}" />
+    </div>
+
+    <div class="product-details">
+        <h2>{{product.name}}</h2>
+
+        <p><strong>Price:</strong> ${{product.price}}</p>
+        <p><strong>Size:</strong> {{product.size}}</p>
+        <p><strong>Color:</strong> {{product.color}}</p>
+        <p style="color: rgb(238, 69, 103);"> {{product.itemQty}} Pieces available </p>
+
+        <div class="description">
+
+            <p>{{product.description}}</p>
+
+        </div>
+
+        <div class="review">
+            <a href="/product/{{product._id}}">Reviews</a>
+
+            {{#if product.reviews.length}}
+
+            {{#range product.rating}}
+            <img src="/assets/star.svg" alt="star" />
+            {{/range}}
+
+            {{else}}
+
+            <span style="color: crimson;"> No ratings</span>
+
+            {{/if}}
+
+
+
+        </div>
+
+        <form method="post" class="product-actions" action="/cart/add/{{product._id}}" id="productForm">
+            <div class="inputs">
+                <div>
+                    <label for="quantity">Qty:</label>
+                    <input type="number" name="quantity" min="1" value="1" class="quantity-input" required />
+                </div>
+
+                <div>
+
+                    <label for="size">Size:</label>
+                    <select type="text" name="size" class="size-input" required>
+                        {{#each product.sizesArray}}
+                        <option value="{{this}}"> {{this}}</option>
+                        {{/each}}
+                    </select>
+
+                </div>
+
+                <div>
+                    <label for="color">Color:</label>
+
+                    <select type="text" name="color" class="color-input" required>
+                        {{#each product.colorsArray}}
+                        <option value="{{this}}"> {{this}}</option>
+                        {{/each}}
+                    </select>
+
+                </div>
+
+            </div>
+
+            <div style="display: flex; width:100%">
+                <button type="submit" name="action" value="add-to-cart" class="add-to-cart-btn">
+                    Add to Cart
+                </button>
+                {{! <button type="submit" name="action" value="buy-now" class="buy-now-btn">
+                    Buy Now
+                </button> }}
+            </div>
+        </form>
+
+    </div>
+
+</div>
+
+
+<div class="add-review">
+
+    <div class="current-reviews">
+
+        <h1> Reviews</h1>
+
+        {{#if product.reviews.length}}
+
+        {{#each product.reviews}}
+        <div class="review">
+            
+            <div class="profile">
+                <img src="/assets/profile.svg" alt="profile">
+                <span> {{this.user.username}} </span>
+            </div>
+
+            <p> {{this.review}}</p>
+
+            <div class="star">
+                {{#range this.star}}
+                <img src="/assets/star.svg" alt="star" />
+                {{/range}}
+            </div>
+
+        </div>
+
+
+        {{/each}}
+
+        {{else}}
+        <div class="no-review"><span style="color: crimson;"> No Review Yet</span></div>
+        {{/if}}
+
+    </div>
+
+    <form method="post" action="/product/review/{{product._id}}">
+
+        <input placeholder="Add Your Product review " name="review" required>
+
+        <select class="select" name="star" type="number">
+            <option value="1">1 star</option>
+            <option value="2">2 star</option>
+            <option value="3">3 star</option>
+            <option value="4">4 star</option>
+            <option value="5">5 star</option>
+        </select>
+
+        <button type="submit"> Review </button>
+    </form>
+
+
+</div>
+
+
+
+
+<h1 style="text-align: center;"> You may Also Like ! </h1>
+
+
+
+
+{{#if recommend}}
+
+<div class="recommend">  {{recommend}} </div>
+
+{{else}}
+
+{{> productCards}}
+
+
+{{/if}}

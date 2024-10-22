@@ -1,0 +1,128 @@
+
+
+
+h1{
+    text-align: center;
+}
+.payment-container {
+  width: 60%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  gap: 20px;
+
+  > .summary {
+    width: 600px;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: rgb(53, 51, 51);
+  }
+
+
+
+  #payment-form {
+    width: 400px;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 0;
+
+
+    > label {
+      color: rgb(61, 60, 60);
+      size: 14px;
+    }
+
+    > #card-element{
+
+      margin-bottom: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: 95%;
+      margin-top: 10px;
+
+    }
+    >input {
+      margin-bottom: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    > #submit-button {
+      background-color: #6772e5;
+      color: white;
+      padding: 10px;
+      border: none;
+      width: 100%;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      position: relative;
+      &:disabled{
+        opacity: 0.5;
+      }
+      &:hover {
+        background-color: #5469d4;
+      }
+    } 
+  }
+
+
+  #spinner {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 20px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #27f3c7;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  #card-errors {
+    color: red;
+    margin-bottom: 10px;
+  }
+
+  #payment-request-button {
+    margin-bottom: 20px;
+  }
+}
+
+
+
+@media (max-width: 900px) {
+
+  .payment-container{
+    width: 100%;
+   flex-direction: column; 
+
+
+   >.summary{
+    width: 400px;
+   }
+
+
+
+  }
+
+
+
+}

@@ -1,0 +1,259 @@
+<link rel="stylesheet" href="/css/checkout.css" />
+
+{{!-- {{#if message}}
+  <div class="message">
+    <h2 style="text-align: center;"> {{message}}</h2>
+  </div>
+
+{{/if}} --}}
+
+
+
+<h1 style="text-align: center;"> Proceed To checkout </h1>
+<div class="checkout-page">
+
+  <div class="address">
+
+    <div class="address-form">
+
+      <h2>Shipping Address</h2>
+
+      <form method="post" action="/user/address/{{user._id}}/{{order._id}}">
+        <div>
+          <label for="fullname">Full Name</label>
+          <input
+            type="text"
+            id="fullname"
+            name="fullname"
+            required
+            value="{{address.fullname}}"
+          />
+        </div>
+
+        <div class="form-group">
+          <div>
+            <label for="street">Street</label>
+            <input
+              type="text"
+              id="street"
+              name="street"
+              required
+              value="{{address.street}}"
+            />
+          </div>
+
+          <div>
+
+            <label for="city">City</label>
+            <input
+              type="text"
+              id="city"
+              name="city"
+              required
+              value="{{address.city}}"
+            />
+          </div>
+
+          <div>
+
+            <label for="state">State</label>
+            <input
+              type="text"
+              id="state"
+              name="state"
+              required
+              value="{{address.state}}"
+            />
+          </div>
+
+        </div>
+
+        <div class="form-group">
+
+          <div>
+
+            <label for="contact">Contact</label>
+            <input
+              type="text"
+              id="contact"
+              name="contact"
+              required
+              value="{{address.contact}}"
+            />
+          </div>
+
+          <div>
+
+            <label for="postalCode">Postal Code</label>
+            <input
+              type="text"
+              id="postalCode"
+              name="postalCode"
+              required
+              value="{{address.postalCode}}"
+            />
+
+          </div>
+
+        </div>
+
+        <div class="form-group">
+
+          <div>
+
+            <label for="landmark">Landmark</label>
+            <input
+              type="text"
+              id="landMark"
+              name="landMark"
+              required
+              value="{{address.landMark}}"
+            />
+          </div>
+
+          <div>
+
+            <label for="country">Country</label>
+            <input
+              type="text"
+              id="country"
+              name="country"
+              required
+              value="{{address.country}}"
+            />
+          </div>
+        </div>
+
+        <h2>Add Card </h2>
+        <div class="form-group">
+          <div>
+
+            <label for="holderName">Cardholder Name</label>
+            <input
+              type="text"
+              id="holderName"
+              name="holderName"
+              placeholder="Your name on card"
+              value="{{card.holderName}}"
+              required
+            />
+          </div>
+
+          <div>
+            <label for="cardNumber">Card Number</label>
+            <input
+              type="text"
+              id="cardNumber"
+              name="cardNumber"
+              placeholder="Card Number"
+              value="{{card.cardNumber}}"
+              required
+            />
+          </div>
+
+        </div>
+
+        <div class="form-group">
+
+          <div>
+
+            <label for="expiry-date">Expiry Date</label>
+            <input
+              type="text"
+              id="expiry"
+              name="expiry"
+              placeholder="MM/YY"
+              value="{{card.expiry}}"
+              required
+            />
+          </div>
+
+          <div>
+
+            <label for="cvv">CVV</label>
+            <input
+              type="text"
+              id="cvv"
+              name="cvv"
+              placeholder="Enter your cvv"
+              required
+            />
+
+          </div>
+        </div>
+
+        <button type="submit" class="add-address-btn">Add Address and Card
+          Details</button>
+      </form>
+    </div>
+
+  </div>
+
+  <div class="summary">
+
+    <div class="address-details">
+      <h2> Shipping Details</h2>
+      <p>{{address.fullname}}</p>
+      <p>
+        <span>
+          {{address.street}},
+          {{address.city}},
+          {{address.state}},
+          {{address.postalCode}},
+          {{address.country}}
+        </span>
+
+      </p>
+
+      <p><span>{{address.contact}}</span></p>
+      <p><span>{{address.landMark}}</span></p>
+
+    </div>
+
+    <div class="product-details">
+      <h2> Product Details</h2>
+      {{#each order.products}}
+        <p> 
+          <label>{{this.productId.name}}| {{this.color}} | {{this.size}}</label>
+          <span>{{this.quantity}} no.s</span>
+        </p>
+
+      {{/each}}
+
+    </div>
+
+    <div class="cart-summary">
+      <h2>Order Summary</h2>
+
+      <p><strong>Total Cart Value:</strong>
+        <span>${{order.totalAmount}}</span></p>
+
+      <p><strong>Discount: </strong> <span>-$ 0</span></p>
+
+      <p><strong>Amount Payable</strong> <span>${{order.totalAmount}}</span></p>
+
+      <p>
+        Note : 1. Kindly Go to your Email after pressing verify Email button and
+        verify the order by click on the link in the mail
+
+        <br />
+        2. Payment options will be unavailable till u verify the link in email
+
+      </p>
+
+      <div class="action-btns">
+
+        <a href="/order/cancel/{{order._id}}" class="cancel-btn">Cancel Order</a>
+       <a href="/order/addAddress/{{order._id}}" class="verify-btn"> Place Order</a>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+
